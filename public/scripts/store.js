@@ -4,9 +4,14 @@
 const store = (function () {
 
   return {
+    server: 'https://noteful-api.glitch.me',  
     notes: [],
-    currentNote: false,
-    currentSearchTerm: ''
+    folders: [],
+    tags: [],
+    currentNote: {},
+    currentQuery: {
+      searchTerm: '',
+    }
   };
 
 }());

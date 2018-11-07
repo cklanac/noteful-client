@@ -1,51 +1,53 @@
-/* global $ */
+/* global $  store */
 'use strict';
 
-const api = {
-
-  search: function (query) {
+const api = (function () {
+  const search = function (path, query) {
     return $.ajax({
       type: 'GET',
-      url: '/api/notes/',
+      url: store.server + path,
       dataType: 'json',
       data: query
     });
-  },
-  details: function (id) {
+  };
+  const details = function (path) {
     return $.ajax({
       type: 'GET',
       dataType: 'json',
-      url: `/api/notes/${id}`
+      url: store.server + path,
     });
-  },
-
-  update: function (id, obj) {
+  };
+  const update = function (path, obj) {
     return $.ajax({
       type: 'PUT',
-      url: `/api/notes/${id}`,
+      url: store.server + path,
       contentType: 'application/json',
       dataType: 'json',
       data: JSON.stringify(obj)
     });
-  },
-
-  create: function (obj) {
+  };
+  const create = function (path, obj) {
     return $.ajax({
       type: 'POST',
-      url: '/api/notes',
+      url: store.server + path,
       contentType: 'application/json',
       dataType: 'json',
       processData: false,
       data: JSON.stringify(obj)
     });
-  },
-
-  remove: function (id) {
+  };
+  const remove = function (path) {
     return $.ajax({
       type: 'DELETE',
-      url: `/api/notes/${id}`,
       dataType: 'json',
+      url: store.server + path,
     });
-  }
-
-}; 
+  };
+  return {
+    create,
+    search,
+    details,
+    update,
+    remove
+  };
+}());

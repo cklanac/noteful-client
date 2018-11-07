@@ -195,7 +195,8 @@ body>main {
 }
 
 #note-edit-form input,
-#note-edit-form textarea {
+#note-edit-form textarea,
+#note-edit-form select {
   padding: 0.5em;
 }
 
@@ -203,7 +204,6 @@ body>main {
 #note-edit-form button {
   width: fit-content;
 }
-
 
 .removeBtn {
   padding: 0;
@@ -251,5 +251,9 @@ select {
   background-color: #4e565d;
   color: #FFFFFF;
   display: inline-block;
+}
+
+.error-message {
+  color:red;
 }
 

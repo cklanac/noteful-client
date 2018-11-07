@@ -1,38 +1,22 @@
-'use strict';
+// server.js
+// where your node app starts
 
+// init project
 const express = require('express');
-const morgan = require('morgan');
-
-const { PORT } = require('./config');
-
-// Create an Express application
 const app = express();
 
-// Log all requests
-app.use(morgan('common'));
+// we've started you off with Express, 
+// but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
-// Create a static webserver
+// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// Catch-all 404
-app.use(function (req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+// http://expressjs.com/en/starter/basic-routing.html
+app.get('/', function(request, response) {
+  response.sendFile(__dirname + '/views/index.html');
 });
 
-// Catch-all Error handler
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.json({
-    message: err.message,
-    error: app.get('env') === 'development' ? err : {}
-  });
-});
-
-// Listen for incoming connections
-app.listen(PORT, function () {
-  console.info(`Server listening on ${this.address().port}`);
-}).on('error', err => {
-  console.error(err);
+// listen for requests :)
+const listener = app.listen(process.env.PORT, function() {
+  console.log('Your app is listening on port ' + listener.address().port);
 });
